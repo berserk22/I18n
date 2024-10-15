@@ -19,11 +19,11 @@ class Translate extends AbstractPlugin {
     /**
      * @param string|null $str
      * @param string $params
-     * @return string
+     * @return string|null
      * @throws DependencyException
      * @throws NotFoundException
      */
-    public function process(string|null $str, string &$params=''): string {
+    public function process(string|null $str, string &$params=''): string|null {
         if (!empty($str)) {
             return $this->getI18nModel()->translate($str, $params);
         }
