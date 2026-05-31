@@ -11,8 +11,8 @@ use Core\Module\Controller;
 use Modules\I18n\I18nTrait;
 use DI\DependencyException;
 use DI\NotFoundException;
-use Slim\Http\ServerRequest as Request;
-use Slim\Http\Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Psr7\Response;
 
 class IndexController extends Controller {
 
@@ -40,6 +40,6 @@ class IndexController extends Controller {
         if (is_null($referer)) {
             $referer = $_SERVER['HTTP_REFERER'];
         }
-        return $response->withRedirect($referer);
+        return $response->withHeader("Location", $referer)->withStatus(302);
     }
 }

@@ -32,15 +32,11 @@ class I18nManager {
      */
     public function initEntity(): static {
         if (!$this->getContainer()->has($this->language)){
-            $this->getContainer()->set($this->language, function(){
-                return 'Modules\I18n\Db\Models\Language';
-            });
+            $this->getContainer()->set($this->language, 'Modules\I18n\Db\Models\Language');
         }
 
         if (!$this->getContainer()->has($this->translate)){
-            $this->getContainer()->set($this->translate, function(){
-                return 'Modules\I18n\Db\Models\Translate';
-            });
+            $this->getContainer()->set($this->translate, 'Modules\I18n\Db\Models\Translate');
         }
         return $this;
     }

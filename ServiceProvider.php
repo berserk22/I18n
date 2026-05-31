@@ -36,24 +36,17 @@ class ServiceProvider extends Provider {
     public function init(): void {
         $container = $this->getContainer();
         if (!$container->has('I18n\Manager')) {
-            $container->set('I18n\Manager', function (){
-                $manager = new I18nManager($this);
-                $manager->initEntity();
-                return $manager;
-            });
+            $manager = new I18nManager($this);
+            $container->set('I18n\Manager', $manager->initEntity());
         }
 
         if (!$container->has('I18n\Model')){
-            $container->set('I18n\Model', function () {
-                return new I18nModel($this);
-            });
+            $container->set('I18n\Model', new I18nModel($this));
         }
 
 
         if (!$container->has($this->router)){
-            $container->set($this->router, function(){
-                return new Router($this);
-            });
+            $container->set($this->router, new Router($this));
         }
     }
 
@@ -86,9 +79,7 @@ class ServiceProvider extends Provider {
      */
     public function boot(): void {
         $container = $this->getContainer();
-        $container->set('Modules\I18n\Controller\IndexController', function(){
-            return new Controller\IndexController($this);
-        });
+        $container->set('Modules\I18n\Controller\IndexController', new Controller\IndexController($this));
     }
 
     /**
